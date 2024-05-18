@@ -3,12 +3,12 @@ import { checkInitialJoin } from "./actions"
 
 export async function middleware(request: NextRequest) {
   const { nextUrl } = request
-  if (!["onboard"].includes(nextUrl.pathname)) {
-    const hasOnboardCookie = await checkInitialJoin()
-    if (!hasOnboardCookie) {
-      return NextResponse.rewrite(new URL("/onboard", request.url))
-    }
-  }
+  // if (!["onboard"].includes(nextUrl.pathname)) {
+  //   const hasOnboardCookie = await checkInitialJoin()
+  //   if (!hasOnboardCookie) {
+  //     return NextResponse.rewrite(new URL("/onboard", request.url))
+  //   }
+  // }
 }
 
 export const config = {

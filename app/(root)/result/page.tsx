@@ -1,27 +1,36 @@
 "use client"
 
 import 도파 from "@/app/assets/icon/dopa.svg"
-import 엔돌 from "@/app/assets/icon/endol.svg"
+import 엔도 from "@/app/assets/icon/endol.svg"
 import 옥시 from "@/app/assets/icon/oxi.svg"
 import 세로 from "@/app/assets/icon/sero.svg"
 
-import React, { useLayoutEffect, useMemo, useState } from "react"
+import React, { useCallback, useLayoutEffect, useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { scaleInOutProps } from "@/constants/variants/scale-in-out"
 import { cn, today } from "@/lib/utils"
 import { Button } from "@/components/button"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const MotionImage = motion(Image)
 const ResultPage = () => {
+  const router = useRouter()
   const now = today()
-  const icons = useMemo(() => ({ 도파, 엔돌, 옥시, 세로 }), [])
+  const icons = useMemo(() => ({ 도파, 엔도, 옥시, 세로 }), [])
   const [isLoaded, setIsLoaded] = useState(false)
   const [content, setContent] = useState<{ title: string; content: string[] }>({
     title: "",
     content: [],
   })
+
+  const checkNewTaskExist = useCallback(() => {
+    if (content.title === "엔도") {
+      return router.replace("/new-task")
+    }
+    return router.replace("/")
+  }, [content.title, router])
+
   useLayoutEffect(() => {
     const prompts = localStorage.getItem("result")
     if (!prompts?.length) return
@@ -72,8 +81,9 @@ const ResultPage = () => {
           <Button
             type="submit"
             className="mt-4 flex w-full justify-center rounded-md"
+            onClick={checkNewTaskExist}
           >
-            <Link href="/new-task">확인</Link>
+            확인
           </Button>
         </>
       ) : null}

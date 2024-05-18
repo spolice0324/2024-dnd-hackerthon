@@ -1,6 +1,6 @@
 "use client"
 import 도파 from "@/app/assets/icon/dopa.svg"
-import 엔돌 from "@/app/assets/icon/endol.svg"
+import 엔도 from "@/app/assets/icon/endol.svg"
 import 옥시 from "@/app/assets/icon/oxi.svg"
 import 세로 from "@/app/assets/icon/sero.svg"
 import { useEffect, useMemo, useState } from "react"
@@ -15,7 +15,7 @@ function shuffle(array: any[]) {
 
 export const LoadingIcon = () => {
   const [mounted, setMounted] = useState(false)
-  const shuffleList = useMemo(() => shuffle([도파, 엔돌, 옥시, 세로]), [])
+  const shuffleList = useMemo(() => shuffle([도파, 엔도, 옥시, 세로]), [])
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
