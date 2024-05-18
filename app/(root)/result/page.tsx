@@ -5,17 +5,18 @@ import 엔돌 from "@/app/assets/icon/endol.svg"
 import 옥시 from "@/app/assets/icon/oxi.svg"
 import 세로 from "@/app/assets/icon/sero.svg"
 
-import React, { useLayoutEffect, useState } from "react"
+import React, { useLayoutEffect, useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { scaleInOutProps } from "@/constants/variants/scale-in-out"
 import { cn, today } from "@/lib/utils"
 import { Button } from "@/components/button"
 import Link from "next/link"
-const icons = { 도파, 엔돌, 옥시, 세로 }
+
 const MotionImage = motion(Image)
 const ResultPage = () => {
   const now = today()
+  const icons = useMemo(() => ({ 도파, 엔돌, 옥시, 세로 }), [])
   const [isLoaded, setIsLoaded] = useState(false)
   const [content, setContent] = useState<{ title: string; content: string[] }>({
     title: "",
