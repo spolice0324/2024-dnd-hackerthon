@@ -11,6 +11,7 @@ import Image from "next/image"
 import { scaleInOutProps } from "@/constants/variants/scale-in-out"
 import { cn, today } from "@/lib/utils"
 import { Button } from "@/components/button"
+import Link from "next/link"
 const icons = { 도파, 엔돌, 옥시, 세로 }
 const MotionImage = motion(Image)
 const ResultPage = () => {
@@ -45,9 +46,11 @@ const ResultPage = () => {
           <MotionImage
             className="mx-auto"
             {...scaleInOutProps}
-            src={icons[content.title as keyof typeof icons].src}
-            width={icons[content.title as keyof typeof icons].width}
-            height={icons[content.title as keyof typeof icons].height}
+            src={icons[(content.title as keyof typeof icons) ?? "도파"].src}
+            width={icons[(content.title as keyof typeof icons) ?? "도파"].width}
+            height={
+              icons[(content.title as keyof typeof icons) ?? "도파"].height
+            }
             alt={content.title}
           />
           <div className="mx-auto mb-10 w-fit rounded-full bg-bg-light px-[64px] py-[10px] text-center text-t2-kr-b">
@@ -69,7 +72,7 @@ const ResultPage = () => {
             type="submit"
             className="mt-4 flex w-full justify-center rounded-md"
           >
-            확인
+            <Link href="/new-task">확인</Link>
           </Button>
         </>
       ) : null}
