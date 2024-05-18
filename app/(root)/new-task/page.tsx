@@ -1,6 +1,6 @@
 import { Button } from "@/components/button"
 import Confetti from "@/components/pages/new-task/confetti"
-import Camera from "@/app/assets/icon/여행관련.png"
+import Camera from "@/app/assets/icon/travel.png"
 import Image from "next/image"
 import React from "react"
 import Infomation from "./_components/infomation"
