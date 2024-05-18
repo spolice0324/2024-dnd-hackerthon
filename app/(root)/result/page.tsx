@@ -35,7 +35,7 @@ const ResultPage = () => {
   }, [])
   return (
     <div>
-      {isLoaded ? (
+      {isLoaded && content.title ? (
         <>
           <h1 className="py-8 text-center text-h3-kr-b">
             {now.month}월 {now.date}일
@@ -46,10 +46,10 @@ const ResultPage = () => {
           <MotionImage
             className="mx-auto"
             {...scaleInOutProps}
-            src={icons[(content.title as keyof typeof icons) ?? "도파"].src}
-            width={icons[(content.title as keyof typeof icons) ?? "도파"].width}
+            src={icons[(content.title as keyof typeof icons) || "도파"].src}
+            width={icons[(content.title as keyof typeof icons) || "도파"].width}
             height={
-              icons[(content.title as keyof typeof icons) ?? "도파"].height
+              icons[(content.title as keyof typeof icons) || "도파"].height
             }
             alt={content.title}
           />
