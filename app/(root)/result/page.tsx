@@ -44,7 +44,6 @@ const ResultPage = () => {
     setIsLoaded(true)
   }, [])
 
-  console.log(content)
   return (
     <div>
       {isLoaded && content.title ? (
