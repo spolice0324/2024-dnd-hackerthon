@@ -1,9 +1,10 @@
 "use client"
 
-import 도파 from "@/app/assets/icon/도파.svg"
-import 엔돌 from "@/app/assets/icon/엔돌.svg"
-import 옥시 from "@/app/assets/icon/옥시.svg"
-import 세로 from "@/app/assets/icon/세로.svg"
+import 도파 from "@/app/assets/icon/dopa.svg"
+import 엔돌 from "@/app/assets/icon/endol.svg"
+import 옥시 from "@/app/assets/icon/oxi.svg"
+import 세로 from "@/app/assets/icon/sero.svg"
+
 import React, { useLayoutEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
