@@ -1,6 +1,8 @@
+"use client"
+import * as React from "react"
 import { cn } from "@/lib/utils"
 import { VariantProps, cva } from "class-variance-authority"
-import { useEffect } from "react"
+import { forwardRef, useEffect } from "react"
 import {
   AnimatePresence,
   HTMLMotionProps,
@@ -16,7 +18,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         "BG-brand":
-          "hover:bg-green-500 active:bg-green-400 text-font-white bg-brand-main",
+          "hover:bg-brand-sub2/70 active:bg-brand-sub2/60  bg-brand-sub2",
         "BG-accent":
           "bg-black text-font-white hover:bg-black-800 active:bg-black-700",
         "BG-neutral":
@@ -65,65 +67,74 @@ interface ButtonProps
   isPending?: boolean
 }
 
-export const Button = ({ ...props }: ButtonProps) => {
-  const { variant, rounded, isPending, children, ...rest } = props
-  const [ref, bounds] = useMeasure()
-  const width = useMotionValue(bounds.width)
-  useEffect(() => {
-    width.set(bounds.width)
-  }, [bounds.width, width])
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ ...props }, buttonRef) => {
+    const { variant, rounded, isPending, className, children, ...rest } = props
+    const [ref, bounds] = useMeasure()
+    const width = useMotionValue(bounds.width)
+    useEffect(() => {
+      width.set(bounds.width)
+    }, [bounds.width, width])
 
-  return (
-    <motion.button
-      className={cn(
-        buttonVariants({ variant, rounded }),
-        rest.className,
-        isPending && "cursor-progress",
-      )}
-      {...rest}
-      style={{
-        ...(width.get() > 0 ? { width } : {}),
-        ...rest.style,
-      }}
-    >
-      <motion.div ref={ref} className="flex w-fit whitespace-nowrap px-5 py-4">
-        <AnimatePresence mode="wait">
-          {isPending ? (
-            <motion.svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="animate-spin"
-              {...fadeInOutProps}
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="11"
-                stroke="url(#paint0_linear_258_42497)"
-                strokeWidth="2"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_258_42497"
-                  x1="12"
-                  y1="12"
-                  x2="12"
-                  y2="24"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="currentColor" />
-                  <stop offset="1" stopColor="currentColor" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-            </motion.svg>
-          ) : (
-            <motion.div {...fadeInOutProps}>{children}</motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </motion.button>
-  )
-}
+    return (
+      <motion.button
+        ref={buttonRef}
+        className={cn(
+          className,
+          buttonVariants({ variant, rounded }),
+          isPending && "cursor-progress",
+        )}
+        {...rest}
+        // style={{
+        //   ...(width.get() > 0 ? { width } : {}),
+        //   ...rest.style,
+        // }}
+      >
+        <motion.div
+          // ref={ref}
+          className="flex w-fit whitespace-nowrap px-5 py-4"
+        >
+          <AnimatePresence mode="wait">
+            {isPending ? (
+              <motion.svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="animate-spin"
+                {...fadeInOutProps}
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="11"
+                  stroke="url(#paint0_linear_258_42497)"
+                  strokeWidth="2"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_258_42497"
+                    x1="12"
+                    y1="12"
+                    x2="12"
+                    y2="24"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="currentColor" />
+                    <stop offset="1" stopColor="currentColor" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+              </motion.svg>
+            ) : (
+              <motion.div {...fadeInOutProps}>{children}</motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </motion.button>
+    )
+  },
+)
+Button.displayName = "Button"
+
+export { Button, type ButtonProps }

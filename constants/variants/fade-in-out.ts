@@ -1,6 +1,6 @@
 import { Variants } from "framer-motion"
 
-const fadeInOutVariants: Variants = {
+export const fadeInOutVariants: Variants = {
   initial: {
     opacity: 0,
   },
