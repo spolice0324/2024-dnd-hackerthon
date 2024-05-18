@@ -24,14 +24,13 @@ const OnboardTitle = () => {
         src={엔도}
         width={54}
         height={54}
-        variants={{
-          animate: {
-            y: "-25%",
-            transition: {
-              repeat: Infinity,
-              repeatType: "reverse",
-              duration: 1,
-            },
+        initial={{ y: 0 }}
+        animate={{
+          y: -25,
+          transition: {
+            repeat: Infinity,
+            repeatType: "reverse",
+            duration: 1,
           },
         }}
         alt="엔도"
