@@ -2,7 +2,7 @@
 
 import 도파 from "@/app/assets/icon/dopa.svg"
 import 엔도 from "@/app/assets/icon/endol.svg"
-import 옥시 from "@/app/assets/icon/oxi.svg"
+import 옥시 from "@/app/assets/icon/oxi.svg"
 import 세로 from "@/app/assets/icon/sero.svg"
 
 import React, { useCallback, useLayoutEffect, useMemo, useState } from "react"
@@ -17,7 +17,7 @@ const MotionImage = motion(Image)
 const ResultPage = () => {
   const router = useRouter()
   const now = today()
-  const icons = useMemo(() => ({ 도파, 엔도, 옥시, 세로 }), [])
+  const icons = useMemo(() => ({ 도파, 엔도, 옥시, 세로 }), [])
   const [isLoaded, setIsLoaded] = useState(false)
   const [content, setContent] = useState<{ title: string; content: string[] }>({
     title: "",
@@ -43,6 +43,8 @@ const ResultPage = () => {
     }))
     setIsLoaded(true)
   }, [])
+
+  console.log(content)
   return (
     <div>
       {isLoaded && content.title ? (
